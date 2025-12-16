@@ -7,8 +7,13 @@ export default function Home() {
   const [filteredAdvocates, setFilteredAdvocates] = useState([]);
 
   useEffect(() => {
-    console.log("fetching advocates...");
-    fetch("/api/advocates").then((response) => {
+    fetch("/api/advocates", { 
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json' // 2. Tell the server the body format
+      },
+      body: JSON.stringify({}) 
+    }).then((response) => {
       response.json().then((jsonResponse) => {
         setAdvocates(jsonResponse.data);
         setFilteredAdvocates(jsonResponse.data);
