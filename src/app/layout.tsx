@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main>
+        <main style={{ margin: "24px" }}>
           <AppProviders>{children}</AppProviders>
         </main>
       </body>

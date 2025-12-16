@@ -10,7 +10,7 @@ export default function useFetchAdvocates(initialPageParam?: number) {
     const [filters, setFilters] = useState<AdvocateQuery>({});
   
     const { fetchNextPage, hasNextPage, data } = useInfiniteQuery({
-    queryKey: ['advocates'],
+    queryKey: ['advocates', filters],
     queryFn: async ({ pageParam }: { pageParam?: number | undefined }) => {
       const response = await fetch("/api/advocates", { 
         method: "POST",
@@ -23,7 +23,7 @@ export default function useFetchAdvocates(initialPageParam?: number) {
     },
     initialPageParam,
     getNextPageParam: (lastPage) => lastPage.page + 1,
-    enabled: false,
+    enabled: true,
   })
 
   useEffect(() => {
