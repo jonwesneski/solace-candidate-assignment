@@ -1,0 +1,2 @@
+- I wanted to make the search for advocates a POST because I feel it will get more complicated in the future. And it is hard to support that in GET requests.
+- Also created some types to help with type saftey
