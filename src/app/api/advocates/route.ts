@@ -3,23 +3,12 @@ import db from "../../../db";
 import { advocates } from "../../../db/schema";
 import { advocateData } from "../../../db/seed/advocates";
 import { sql, or, eq, SQL } from "drizzle-orm";
+import { AdvocateQuery } from "@/types/advocate";
 
-type AdvocateQuery = {
-  page: number,
-  pageSize: number,
-  firstName: string,
-  lastName: string,
-  city: string,
-  degree: string,
-  specialties: string[],
-  yearsOfExperience: number,
-  phoneNumber: bigint,
-  createdAt: string,
-};
 
 export async function POST(request: NextRequest) {
   let data = advocateData;
-  let body: Partial<AdvocateQuery> = {};
+  let body: AdvocateQuery = {};
   let page = 1;
   let pageSize = 10;
   try {
@@ -62,15 +51,16 @@ export async function POST(request: NextRequest) {
     );
     conditions.push(or(...specialtyConditions));
   }
+
   try {
-    data = (await db.select().from(advocates)
+    data = await db.select().from(advocates)
       .limit(pageSize)
       .offset((page - 1) * pageSize)
-      .where(conditions));
+      .where(conditions);
   } catch (error) {
     console.error("Database query failed:", error);
 
   }
 
-  return Response.json({ data });
+  return Response.json({ data, page, pageSize });
 }

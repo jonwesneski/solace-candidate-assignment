@@ -1,0 +1,6 @@
+- Since we can have tens of thousands of records here, I want to limit the amount that is retrieved. I implemented a pagination feature for this.
+- Being able to scroll and having data being fetched in the background at a certin point is a nice UX. The certain point is the 3rd to the last row. Once it gets to this point and there are more pages, it will do another fetch.
+- I make the 1st request in an SSR component so I improve the initial load time.
+- I moved the fetching api to a reuseable hook in case it does get reused
+- I created some folders to organize this new feature. It is a lot of setup just for supporting the new API feature
+
