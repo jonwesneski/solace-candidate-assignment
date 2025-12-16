@@ -1,6 +1,6 @@
 
 import { AdvocateResponse } from "@/types/advocate";
-import { AdvocateSearch } from "./AdvocateSearch";
+import { AdvocateSearch } from "./_components/AdvocateSearch";
 
 export default async function Home() {
 
